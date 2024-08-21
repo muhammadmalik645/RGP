@@ -3567,3 +3567,16 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+.payment-icons svg{
+  width: 64px;
+  height: 44px;
+}
+
+div.payment-icons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}

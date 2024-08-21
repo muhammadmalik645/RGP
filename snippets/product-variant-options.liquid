@@ -91,10 +91,50 @@
       {% endif %}
       {{ input_dataset }}
     >
-    <label for="{{ input_id }}">
-      {{ value -}}
-      {{ label_unavailable }}
-    </label>
+    {% assign variant_index = forloop.index | minus: 1 %}
+    <div class="variant-label-wrapper">
+      <label for="{{ input_id }}">
+        <div class="variant-label-heading-wrapper">
+          <h2 class="variant-label-heading">
+            {{ value -}}
+            {{ label_unavailable }}
+          </h2>
+
+          <div>
+            {% if product.variants[variant_index].compare_at_price %}
+              <span class="price-strikethrough">
+                {{ product.variants[variant_index].compare_at_price | money }}
+              </span>
+            {% endif %}
+            <span>
+              {{ product.variants[variant_index].price | money }}
+            </span>
+          </div>
+        </div>
+        {% if product.variants[variant_index].metafields.custom.badge %}
+          <div class="variant-badge">
+            {{ product.variants[variant_index].metafields.custom.badge }}
+          </div>
+        {% endif %}
+        {% if product.variants[variant_index].metafields.custom.features %}
+          <div class="variant-features-wrapper">
+            <ul class="variant-features-list">
+              {% for value in product.variants[variant_index].metafields.custom.features.value %}
+                <li>
+                  {% render 'bullet-svg' -%}
+                  {{- value }}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+        {% if product.variants[variant_index].metafields.custom.variant_description %}
+          <article class="variant-description">
+            {{ product.variants[variant_index].metafields.custom.variant_description }}
+          </article>
+        {% endif %}
+      </label>
+    </div>
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
     <option
       id="{{ input_id }}"
