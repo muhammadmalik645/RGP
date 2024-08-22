@@ -25,7 +25,8 @@
         "enable_country_selector": false,
         "enable_language_selector": false,
         "select_background_image": "shopify:\/\/shop_images\/image_16.png",
-        "select_announcement_image": "shopify:\/\/shop_images\/Group_1228.png"
+        "select_announcement_image": "shopify:\/\/shop_images\/Group_1228.png",
+        "select_announcement_image_mob": "shopify:\/\/shop_images\/MergedImages.png"
       }
     },
     "header": {
@@ -34,17 +35,21 @@
         "logo_position": "middle-left",
         "menu": "main-menu",
         "menu_type_desktop": "dropdown",
-        "sticky_header_type": "on-scroll-up",
+        "sticky_header_type": "none",
         "show_line_separator": true,
         "color_scheme": "scheme-1",
         "menu_color_scheme": "scheme-1",
-        "enable_country_selector": true,
-        "enable_language_selector": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
         "enable_customer_avatar": true,
-        "mobile_logo_position": "center",
+        "mobile_logo_position": "left",
         "margin_bottom": 0,
-        "padding_top": 20,
-        "padding_bottom": 20
+        "padding_top": 17.5,
+        "padding_bottom": 17.5,
+        "enable_search_icon": false,
+        "enable_cart_icon": false,
+        "button_text": "Buy Now",
+        "button_url": "shopify:\/\/products\/firebee-headband"
       }
     }
   },

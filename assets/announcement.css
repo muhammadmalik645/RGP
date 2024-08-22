@@ -1,5 +1,6 @@
 .utility-bar{
     height: 74px;
+    overflow: hidden;
 }
 
 .announcement-bar,.announcement-bar__announcement{
@@ -17,13 +18,46 @@ img.foreground-announcement-image{
     position: absolute;
     z-index: 1;
     width: 100%;
+    
 }
 
 .announcement-bar .announcement-bar__message{
     font-weight: 800;
-    font-family: 'Inter';
-    letter-spacing: 2.4px;
     z-index: 2;
+    letter-spacing: 2.4px;
+}
+
+img.foreground-announcement-image{
+    display: block;
+}
+
+img.foreground-announcement-image.mobile-only{
+    display: none;
+}
+
+@media (max-width: 787px) {
+    .announcement-bar .announcement-bar__message{
+        font-size: 18px;
+        letter-spacing: 0.1rem;
+        max-width: 212px;
+    }
+
+    .utility-bar{
+        height: 64px;
+    }
+
+    img.foreground-announcement-image{
+        /* object-fit: cover; */
+        /* object-position: center;
+        width: 131%;
+        image-rendering: auto;
+        height: 56%;
+        top: 22px; */
+        display: none;
+    }
+    img.foreground-announcement-image.mobile-only{
+        display: block;
+    }
 }
 
 .announcement-bar-slider {

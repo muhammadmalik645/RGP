@@ -2371,7 +2371,7 @@ input[type='checkbox'] {
   .header--middle-left {
     grid-template-areas: 'heading navigation icons';
     grid-template-columns: auto auto 1fr;
-    column-gap: 2rem;
+    column-gap: 30.5px;
   }
 
   .header--middle-center:not(.drawer-menu) {
@@ -2438,6 +2438,7 @@ input[type='checkbox'] {
 .header__heading-logo {
   height: auto;
   max-width: 100%;
+  width: 128px;
 }
 
 .header__heading-logo-wrapper {
@@ -2492,7 +2493,13 @@ input[type='checkbox'] {
   display: flex;
   grid-area: icons;
   justify-self: end;
-  padding-right: 0.8rem;
+  align-items: center;
+}
+
+@media screen and (min-width: 990px) {
+  .header__icons{
+    padding-right: 0.8rem;
+  }
 }
 
 .header__icons .shopify-app-block {
@@ -2764,7 +2771,7 @@ details[open] > .header__submenu {
 }
 
 .header__menu-item {
-  padding: 1.2rem;
+  padding: 1.2rem 2.5rem;
   text-decoration: none;
   color: rgba(var(--color-foreground), 0.75);
 }
@@ -2775,6 +2782,10 @@ details[open] > .header__submenu {
 
 .header__menu-item span {
   transition: text-decoration var(--duration-short) ease;
+  font-size: 18px;
+  line-height: 27px;
+  color: #27292D;
+  
 }
 
 .header__menu-item:hover span {
@@ -3579,4 +3590,31 @@ div.payment-icons{
   justify-content: center;
   gap: 10px;
   margin-top: 20px;
+}
+
+.header-button{
+  padding: 0;
+  border-radius: 32.5px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 27px;
+  margin-right: 23px;
+  min-height: 39px;
+  min-width: 112px;
+}
+
+.header-button::after{
+  border-radius: 32.5px;
+}
+
+@media (min-width: 787px) {
+  .header-button{
+    margin-right: 40px;
+    height: 65px;
+    min-width: 154px;
+  }
+}
+
+body{
+  overflow-x: hidden;
 }

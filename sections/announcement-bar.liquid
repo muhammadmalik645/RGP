@@ -53,6 +53,17 @@
                 fetchpriority: 'high'
             }}
           {% endif %}
+          {% if section.settings.select_announcement_image_mob %}
+            {{
+              section.settings.select_announcement_image_mob
+              | image_url: width: 3840
+              | image_tag:
+                width: section.settings.select_announcement_image_mob.width,
+                height: section.settings.select_announcement_image_mob.height,
+                class: 'foreground-announcement-image mobile-only',
+                fetchpriority: 'high'
+            }}
+          {% endif %}
           {%- if section.blocks.first.settings.link != blank -%}
             <a
               href="{{ section.blocks.first.settings.link }}"
@@ -85,7 +96,7 @@
               width: section.settings.select_announcement_image.width,
               height: section.settings.select_announcement_image.height,
               class: 'foreground-announcement-image',
-              fetchpriority: 'high'
+              fetchpriority: 'low'
           }}
         {% endif %}
         <div class="announcement-bar-slider slider-buttons">
@@ -275,6 +286,12 @@
       "id": "select_announcement_image",
       "label": "Select announcement image",
       "info": "Select the image you want to display on top of the background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "select_announcement_image_mob",
+      "label": "Select announcement image for mobile",
+      "info": "Select the image you want to display on top of the background image on mobile devices"
     }
   ],
   "blocks": [
