@@ -74,7 +74,7 @@
 
 {%- style -%}
   .header {
-    padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
+    padding: {{ section.settings.padding_top | times: 0.88 | round: 0 }}px 17px {{ section.settings.padding_bottom | times: 0.88 | round: 0 }}px 9.5px;
   }
 
   .section-header {
@@ -136,15 +136,6 @@
     endif
   -%}
   <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
-    {%- liquid
-      if section.settings.menu != blank
-        render 'header-drawer'
-      endif
-
-      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
-        render 'header-search', input_id: 'Search-In-Modal-1'
-      endif
-    -%}
 
     {%- if section.settings.logo_position != 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
@@ -240,8 +231,14 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
-
+      {% if section.settings.enable_search_icon %}
+        {% render 'header-search', input_id: 'Search-In-Modal' %}
+      {% endif %}
+      {% if section.settings.button_text %}
+        <a class="button button--primary header-button" href="{{ section.settings.button_url }}">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
       {%- if shop.customer_accounts_enabled -%}
         <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
           {%- if section.settings.enable_customer_avatar -%}
@@ -274,24 +271,35 @@
         {%- endcase -%}
       {%- endfor -%}
 
-      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
-        {%- liquid
-          if cart == empty
-            render 'icon-cart-empty'
-          else
-            render 'icon-cart'
-          endif
-        -%}
-        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
-        {%- if cart != empty -%}
-          <div class="cart-count-bubble">
-            {%- if cart.item_count < 100 -%}
-              <span aria-hidden="true">{{ cart.item_count }}</span>
-            {%- endif -%}
-            <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
-          </div>
-        {%- endif -%}
-      </a>
+      {% if section.settings.enable_cart_icon %}
+        <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
+          {%- liquid
+            if cart == empty
+              render 'icon-cart-empty'
+            else
+              render 'icon-cart'
+            endif
+          -%}
+          <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+          {%- if cart != empty -%}
+            <div class="cart-count-bubble">
+              {%- if cart.item_count < 100 -%}
+                <span aria-hidden="true">{{ cart.item_count }}</span>
+              {%- endif -%}
+              <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+            </div>
+          {%- endif -%}
+        </a>
+      {% endif %}
+      {%- liquid
+      if section.settings.menu != blank
+        render 'header-drawer'
+      endif
+
+      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
+        render 'header-search', input_id: 'Search-In-Modal-1'
+      endif
+    -%}
     </div>
   </header>
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
@@ -633,20 +641,47 @@
       "id": "padding_top",
       "min": 0,
       "max": 36,
-      "step": 4,
+      "step": 0.5,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
-      "default": 20
+      "default": 18
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
       "max": 36,
-      "step": 4,
+      "step": 0.5,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 20
+      "default": 18
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_search_icon",
+      "default": false,
+      "label": "Show Search Icon",
+      "info": "Do you want to show the search icon in the header?"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_cart_icon",
+      "default": false,
+      "label": "Show Cart Icon",
+      "info": "Do you want to show the cart icon in the header?"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "default": "Buy Now",
+      "label": "Enter Button Text",
+      "info": "Leave it empty if you don't want to show a button in the header"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Enter Button URL",
+      "info": "Enter the URL this button should lead to"
     }
   ],
   "blocks": [

@@ -1034,7 +1034,7 @@ summary::-webkit-details-marker {
     min-width: 35%;
   }
 
-  .grid--peek.slider .grid__item:first-of-type {
+  .grid--peek.slider .grid__item {
     margin-left: 1.5rem;
   }
 
@@ -2214,6 +2214,7 @@ input[type='checkbox'] {
   height: 100%;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 }
 
 .announcement-bar__link:hover {
@@ -2370,7 +2371,7 @@ input[type='checkbox'] {
   .header--middle-left {
     grid-template-areas: 'heading navigation icons';
     grid-template-columns: auto auto 1fr;
-    column-gap: 2rem;
+    column-gap: 30.5px;
   }
 
   .header--middle-center:not(.drawer-menu) {
@@ -2437,6 +2438,7 @@ input[type='checkbox'] {
 .header__heading-logo {
   height: auto;
   max-width: 100%;
+  width: 128px;
 }
 
 .header__heading-logo-wrapper {
@@ -2491,7 +2493,13 @@ input[type='checkbox'] {
   display: flex;
   grid-area: icons;
   justify-self: end;
-  padding-right: 0.8rem;
+  align-items: center;
+}
+
+@media screen and (min-width: 990px) {
+  .header__icons{
+    padding-right: 0.8rem;
+  }
 }
 
 .header__icons .shopify-app-block {
@@ -2763,7 +2771,7 @@ details[open] > .header__submenu {
 }
 
 .header__menu-item {
-  padding: 1.2rem;
+  padding: 1.2rem 2.5rem;
   text-decoration: none;
   color: rgba(var(--color-foreground), 0.75);
 }
@@ -2774,6 +2782,10 @@ details[open] > .header__submenu {
 
 .header__menu-item span {
   transition: text-decoration var(--duration-short) ease;
+  font-size: 18px;
+  line-height: 27px;
+  color: #27292D;
+  
 }
 
 .header__menu-item:hover span {
@@ -3566,3 +3578,166 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+.payment-icons svg{
+  width: 64px;
+  height: 44px;
+}
+
+div.payment-icons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.header-button{
+  padding: 0;
+  border-radius: 32.5px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 27px;
+  margin-right: 23px;
+  min-height: 39px;
+  min-width: 112px;
+}
+
+.header-button::after{
+  border-radius: 32.5px;
+}
+
+@media (min-width: 787px) {
+  .header-button{
+    margin-right: 40px;
+    height: 65px;
+    min-width: 154px;
+  }
+}
+
+body{
+  overflow-x: hidden;
+}
+
+@media (max-width: 750px) {
+  .payment-icons svg{
+    width: 49.4px;
+    height: 34px;
+  }
+
+  div.payment-icons{
+    gap: 7.5px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+div.product-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 34px;
+}
+
+.product-benefits-item {
+  display: flex;
+  align-items: flex-start;
+}
+
+.product-benefits-item img {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  object-fit: scale-down;
+  margin-top: 4px;
+  margin-right: 25px;
+}
+
+.product-benefits-item p {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0;
+  flex: 1;
+  margin: 0;
+  text-align: left;
+}
+
+div.product-benefits.mobile-only{
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  div.product-benefits {
+    justify-content: space-between;
+    padding: 0;
+    margin-top: 30px;
+  }
+
+  .product-benefits-item {
+    max-width: calc(50% - 4.5px);
+    width: 100%;
+    order: 3;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  div.product-benefits.mobile-only{
+    display: flex;
+  }
+
+  
+  div.desktop-only{
+    display: none;
+  }
+
+  .product-benefits-item p {
+    text-align: center;
+  }
+
+  .product-benefits-item:nth-child(1) {
+    order: 1;
+  }
+
+  .product-benefits-item:nth-child(4) {
+    order: 2;
+  }
+
+  .product-benefits-item img {
+    margin-top: -1px;
+    margin-right: 0px;
+  }
+}
+
+@media screen and (min-width: 1190px) {
+  .product-benefits-item p {
+    width: 220px;
+  }
+}
+
+@media (min-width: 770px) and (max-width: 1189px) {
+  .product-benefits-item p {
+    width: 170px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .text-left .product-benefits {
+    justify-content: flex-start;
+  }
+
+  .text-right .product-benefits {
+    justify-content: flex-end;
+  }
+
+  .product-benefits {
+    gap: 12px 24px;
+  }
+
+  .desktop-only .product-benefits-item p {
+    font-size: 18px;
+    line-height: 30px;
+  }
+}
+

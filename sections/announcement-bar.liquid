@@ -1,5 +1,6 @@
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'announcement.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   assign social_icons = true
@@ -26,6 +27,13 @@
     {%- if section.settings.show_social and social_icons -%}
       {%- render 'social-icons' -%}
     {%- endif -%}
+    {% style %}
+      .announcement-bar {
+        background-image: url('{{ section.settings.select_background_image | image_url: width: section.settings.select_background_image.width }}');
+        height: inherit;
+      }
+    {% endstyle %}
+
     {%- if section.blocks.size == 1 -%}
       <div
         class="announcement-bar{% if section.settings.show_social %} announcement-bar--one-announcement{% endif %}"
@@ -34,13 +42,35 @@
         {{ block.shopify_attributes }}
       >
         {%- if section.blocks.first.settings.text != blank -%}
+          {% if section.settings.select_announcement_image %}
+            {{
+              section.settings.select_announcement_image
+              | image_url: width: 3840
+              | image_tag:
+                width: section.settings.select_announcement_image.width,
+                height: section.settings.select_announcement_image.height,
+                class: 'foreground-announcement-image',
+                fetchpriority: 'high'
+            }}
+          {% endif %}
+          {% if section.settings.select_announcement_image_mob %}
+            {{
+              section.settings.select_announcement_image_mob
+              | image_url: width: 3840
+              | image_tag:
+                width: section.settings.select_announcement_image_mob.width,
+                height: section.settings.select_announcement_image_mob.height,
+                class: 'foreground-announcement-image mobile-only',
+                fetchpriority: 'high'
+            }}
+          {% endif %}
           {%- if section.blocks.first.settings.link != blank -%}
             <a
               href="{{ section.blocks.first.settings.link }}"
               class="announcement-bar__link link link--text focus-inset animate-arrow"
             >
           {%- endif -%}
-          <p class="announcement-bar__message h5">
+          <p class="announcement-bar__message h2">
             <span>{{ section.blocks.first.settings.text | escape }}</span>
             {%- if section.blocks.first.settings.link != blank -%}
               {% render 'icon-arrow' %}
@@ -58,6 +88,17 @@
         aria-roledescription="{{ 'sections.announcements.carousel' | t }}"
         aria-label="{{ 'sections.announcements.announcement_bar' | t }}"
       >
+        {% if section.settings.select_announcement_image %}
+          {{
+            section.settings.select_announcement_image
+            | image_url: width: 3840
+            | image_tag:
+              width: section.settings.select_announcement_image.width,
+              height: section.settings.select_announcement_image.height,
+              class: 'foreground-announcement-image',
+              fetchpriority: 'low'
+          }}
+        {% endif %}
         <div class="announcement-bar-slider slider-buttons">
           <button
             type="button"
@@ -99,7 +140,7 @@
                         class="announcement-bar__link link link--text focus-inset animate-arrow"
                       >
                     {%- endif -%}
-                    <p class="announcement-bar__message h5">
+                    <p class="announcement-bar__message h2">
                       <span>{{ block.settings.text | escape }}</span>
                       {%- if block.settings.link != blank -%}
                         {% render 'icon-arrow' %}
@@ -233,6 +274,24 @@
       "id": "enable_language_selector",
       "default": false,
       "label": "t:sections.announcement-bar.settings.enable_language_selector.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "select_background_image",
+      "label": "Select background image",
+      "info": "Select the image you want to display in the background"
+    },
+    {
+      "type": "image_picker",
+      "id": "select_announcement_image",
+      "label": "Select announcement image",
+      "info": "Select the image you want to display on top of the background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "select_announcement_image_mob",
+      "label": "Select announcement image for mobile",
+      "info": "Select the image you want to display on top of the background image on mobile devices"
     }
   ],
   "blocks": [

@@ -1,0 +1,10 @@
+{%- assign enabled_payment_types = 'visa,master,american_express,maestro,paypal,affirm'
+  | remove: ' '
+  | split: ','
+-%}
+<div class="payment-icons">
+  {%- for type in enabled_payment_types -%}
+    {{ type | payment_type_svg_tag }}
+  {%- endfor -%}
+</div>
+

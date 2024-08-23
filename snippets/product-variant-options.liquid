@@ -91,10 +91,34 @@
       {% endif %}
       {{ input_dataset }}
     >
-    <label for="{{ input_id }}">
-      {{ value -}}
-      {{ label_unavailable }}
-    </label>
+    {% assign variant_index = forloop.index | minus: 1 %}
+    <div class="variant-label-wrapper">
+      <label for="{{ input_id }}">
+        <div class="variant-label-heading-wrapper">
+          <h2 class="variant-label-heading">
+            {{ value -}}
+            {{ label_unavailable }}
+          </h2>
+
+          <div>
+            {% if product.variants[variant_index].compare_at_price %}
+              <span class="price-strikethrough">
+                {{ product.variants[variant_index].compare_at_price | money }}
+              </span>
+            {% endif %}
+            <span>
+              {{ product.variants[variant_index].price | money }}
+            </span>
+          </div>
+        </div>
+
+        {% render 'product-badges', variant: product.variants[variant_index] %}
+        {% render 'variant-features', variant: product.variants[variant_index] %}
+        {% render 'variant-description', variant: product.variants[variant_index] %}
+
+
+      </label>
+    </div>
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
     <option
       id="{{ input_id }}"
