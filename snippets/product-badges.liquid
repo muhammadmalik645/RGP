@@ -1,0 +1,11 @@
+{% comment %} 
+    Accepted Params:
+    variant: The current product variant
+{% endcomment %}
+
+
+{% if variant.metafields.custom.badge %}
+  <div class="variant-badge">
+    {{ variant.metafields.custom.badge }}
+  </div>
+{% endif %}

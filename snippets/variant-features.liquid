@@ -1,0 +1,17 @@
+{% comment %} 
+    Accepted Params:
+    variant: The current product variant
+{% endcomment %}
+
+{% if variant.metafields.custom.features %}
+  <div class="variant-features-wrapper">
+    <ul class="variant-features-list">
+      {% for value in variant.metafields.custom.features.value %}
+        <li>
+          {% render 'bullet-svg' -%}
+          <p>{{ value }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}

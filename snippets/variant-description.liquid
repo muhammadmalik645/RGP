@@ -1,0 +1,10 @@
+{% comment %} 
+    Accepted Params:
+    variant: The current product variant
+{% endcomment %}
+
+{% if variant.metafields.custom.variant_description %}
+  <article class="variant-description">
+    {{ variant.metafields.custom.variant_description }}
+  </article>
+{% endif %}

@@ -27,8 +27,8 @@
 
   {%- style -%}
     .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+      padding-top: {{ section.settings.padding_top | times: 0.54 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.54 | round: 0 }}px;
       background-color: #F6F6F6;
     }
 
@@ -44,6 +44,12 @@
     {% style %}
       .product-media-container .product__modal-opener {
         padding-top: 75px;
+      }
+
+      @media screen and (max-width: 750px) {
+        .product-media-container .product__modal-opener{
+          padding-top: 50px;
+        }
       }
     {% endstyle %}
   {% endif %}
@@ -97,26 +103,26 @@
           </div>
         {% endif %}
         {% render 'product-media-gallery', variant_images: variant_images %}
-        <div class="subscription-benefits__usp">
-          <div class="subscription-benefits__usp-item">
+        <div class="product-benefits desktop-only">
+          <div class="product-benefits-item">
             {%- if section.settings.icon1 -%}
               <img src="{{ section.settings.icon1 | image_url: width: 48 }}" alt="{{ section.settings.icon_text1 }}" width="{{ section.settings.icon1.width }}" height="{{ section.settings.icon1.height }}">
             {%- endif -%}
             <p>{{ section.settings.icon_text1 | newline_to_br }}</p>
           </div>
-          <div class="subscription-benefits__usp-item">
+          <div class="product-benefits-item">
             {%- if section.settings.icon2 -%}
               <img src="{{ section.settings.icon2 | image_url: width: 48 }}" alt="{{ section.settings.icon_text2 }}" width="{{ section.settings.icon2.width }}" height="{{ section.settings.icon2.height }}">
             {%- endif -%}
             <p>{{ section.settings.icon_text2 | newline_to_br }}</p>
           </div>
-          <div class="subscription-benefits__usp-item">
+          <div class="product-benefits-item">
             {%- if section.settings.icon3 -%}
               <img src="{{ section.settings.icon3 | image_url: width: 48 }}" alt="{{ section.settings.icon_text3 }}" width="{{ section.settings.icon3.width }}" height="{{ section.settings.icon3.height }}">
             {%- endif -%}
             <p>{{ section.settings.icon_text3 | newline_to_br }}</p>
           </div>
-          <div class="subscription-benefits__usp-item">
+          <div class="product-benefits-item">
             {%- if section.settings.icon4 -%}
               <img src="{{ section.settings.icon4 | image_url: width: 48 }}" alt="{{ section.settings.icon_text4 }}" width="{{ section.settings.icon4.width }}" height="{{ section.settings.icon4.height }}">
             {%- endif -%}
@@ -704,8 +710,36 @@
                 {% render 'icon-with-text', block: block %}
               {% when 'payment-icons' %}
                 {% render 'payment-icons' %}
+              {% when 'shipping-date' %}
+                {% render 'shipping-date', days: block.settings.days %}
             {%- endcase -%}
           {%- endfor -%}
+          <div class="product-benefits mobile-only">
+            <div class="product-benefits-item">
+              {%- if section.settings.icon1 -%}
+                <img src="{{ section.settings.icon1 | image_url: width: 48 }}" alt="{{ section.settings.icon_text1 }}" width="{{ section.settings.icon1.width }}" height="{{ section.settings.icon1.height }}">
+              {%- endif -%}
+              <p>{{ section.settings.icon_text1 | newline_to_br }}</p>
+            </div>
+            <div class="product-benefits-item">
+              {%- if section.settings.icon2 -%}
+                <img src="{{ section.settings.icon2 | image_url: width: 48 }}" alt="{{ section.settings.icon_text2 }}" width="{{ section.settings.icon2.width }}" height="{{ section.settings.icon2.height }}">
+              {%- endif -%}
+              <p>{{ section.settings.icon_text2 | newline_to_br }}</p>
+            </div>
+            <div class="product-benefits-item">
+              {%- if section.settings.icon3 -%}
+                <img src="{{ section.settings.icon3 | image_url: width: 48 }}" alt="{{ section.settings.icon_text3 }}" width="{{ section.settings.icon3.width }}" height="{{ section.settings.icon3.height }}">
+              {%- endif -%}
+              <p>{{ section.settings.icon_text3 | newline_to_br }}</p>
+            </div>
+            <div class="product-benefits-item">
+              {%- if section.settings.icon4 -%}
+                <img src="{{ section.settings.icon4 | image_url: width: 48 }}" alt="{{ section.settings.icon_text4 }}" width="{{ section.settings.icon4.width }}" height="{{ section.settings.icon4.height }}">
+              {%- endif -%}
+              <p>{{ section.settings.icon_text4 | newline_to_br }}</p>
+            </div>
+          </div>
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
             {{ 'products.product.view_full_details' | t }}
             {% render 'icon-arrow' %}
@@ -2124,6 +2158,20 @@
       "name": "Payment Icons",
       "limit": 1,
       "settings": []
+    },
+    {
+      "type": "shipping-date",
+      "name": "Shipping Date",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "number",
+          "id": "days",
+          "label": "How many days does it take to ship this product",
+          "info": "Enter the number of days it takes to ship this product, this is required for this widget to work",
+          "default": 5
+        }
+      ]
     }
   ],
   "settings": [

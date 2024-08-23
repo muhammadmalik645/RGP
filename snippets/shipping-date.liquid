@@ -1,0 +1,16 @@
+{% comment %} 
+    Accepted Params:
+    days: The number of days it takes to ship the product
+{% endcomment %}
+
+
+{% liquid 
+  assign now = 'now' | date: "%s"
+  assign days_to_add_in_seconds = days | times: 86400
+  assign future_timestamp = now | plus: days_to_add_in_seconds
+  assign future_date = future_timestamp | date: "%B %d, %Y" 
+%}
+
+<div class="shipping-date">
+    Order today and receive your Firebee by {{ future_date }}
+</div>

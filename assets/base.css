@@ -1034,7 +1034,7 @@ summary::-webkit-details-marker {
     min-width: 35%;
   }
 
-  .grid--peek.slider .grid__item:first-of-type {
+  .grid--peek.slider .grid__item {
     margin-left: 1.5rem;
   }
 
@@ -3618,3 +3618,126 @@ div.payment-icons{
 body{
   overflow-x: hidden;
 }
+
+@media (max-width: 750px) {
+  .payment-icons svg{
+    width: 49.4px;
+    height: 34px;
+  }
+
+  div.payment-icons{
+    gap: 7.5px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+div.product-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 34px;
+}
+
+.product-benefits-item {
+  display: flex;
+  align-items: flex-start;
+}
+
+.product-benefits-item img {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  object-fit: scale-down;
+  margin-top: 4px;
+  margin-right: 25px;
+}
+
+.product-benefits-item p {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0;
+  flex: 1;
+  margin: 0;
+  text-align: left;
+}
+
+div.product-benefits.mobile-only{
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  div.product-benefits {
+    justify-content: space-between;
+    padding: 0;
+    margin-top: 30px;
+  }
+
+  .product-benefits-item {
+    max-width: calc(50% - 4.5px);
+    width: 100%;
+    order: 3;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  div.product-benefits.mobile-only{
+    display: flex;
+  }
+
+  
+  div.desktop-only{
+    display: none;
+  }
+
+  .product-benefits-item p {
+    text-align: center;
+  }
+
+  .product-benefits-item:nth-child(1) {
+    order: 1;
+  }
+
+  .product-benefits-item:nth-child(4) {
+    order: 2;
+  }
+
+  .product-benefits-item img {
+    margin-top: -1px;
+    margin-right: 0px;
+  }
+}
+
+@media screen and (min-width: 1190px) {
+  .product-benefits-item p {
+    width: 220px;
+  }
+}
+
+@media (min-width: 770px) and (max-width: 1189px) {
+  .product-benefits-item p {
+    width: 170px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .text-left .product-benefits {
+    justify-content: flex-start;
+  }
+
+  .text-right .product-benefits {
+    justify-content: flex-end;
+  }
+
+  .product-benefits {
+    gap: 12px 24px;
+  }
+
+  .desktop-only .product-benefits-item p {
+    font-size: 18px;
+    line-height: 30px;
+  }
+}
+
